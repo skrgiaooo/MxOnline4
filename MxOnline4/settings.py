@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'xadmin.apps.XAdminConfig',
     'crispy_forms',
     'apps.organizations.apps.OrganizationsConfig',
+    'apps.operations.apps.OperationsConfig',
+    'pure_pagination',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +140,12 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+#分页相关的设置
+PAGINATION_SETTINGS = {
+#页面范围的显示 主分页部分显示几个
+    'PAGE_RANGE_DISPLAYED': 10,
+#省略号前面或者后面显示几个
+    'MARGIN_PAGES_DISPLAYED': 2,
+#是否显示第一页
+    'SHOW_FIRST_PAGE_WHEN_INVALID': True,
+}
