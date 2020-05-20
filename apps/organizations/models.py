@@ -1,7 +1,6 @@
 from django.db import models
-
 from apps.users.models import BaseModel
-
+from apps.users.models import UserProfile
 
 class City(BaseModel):
     name = models.CharField(max_length=20, verbose_name=u"城市名")

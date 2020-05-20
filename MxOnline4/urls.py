@@ -18,10 +18,15 @@ from django.urls import path
 import xadmin
 from django.views.generic import TemplateView
 from apps.users.views import LoginView
+from apps.organizations.views import OrgView
+from django.conf.urls import url,include
+from django.views.static import serve
+from MxOnline4.settings import MEDIA_ROOT
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('xadmin/',xadmin.site.urls),
     path('',TemplateView.as_view(template_name='index.html'),name='index'),
-    path('login/',LoginView.as_view(),name='login')
-
+    path('login/',LoginView.as_view(),name='login'),
+    path('orglist/',OrgView.as_view(),name='org-list'),
+    url(r'^media/(?P<path>.*)$',serve,{'document_root':MEDIA_ROOT})
 ]
