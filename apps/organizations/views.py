@@ -6,7 +6,7 @@ from pure_pagination import Paginator,EmptyPage,PageNotAnInteger
 class OrgView(View):
     def get(self,request,*args,**kwargs):
         all_orgs = CourseOrg.objects.all()
-        org_nums = CourseOrg.objects.all().count()
+
         all_citys = City.objects.all()
         # city_id = request.GET.get('city','')
         category = request.GET.get('ct','')
@@ -14,7 +14,12 @@ class OrgView(View):
         if category:
             all_orgs = all_orgs.filter(category=category)
 
-
+        city_id = request.GET.get('city', '')
+        if city_id:
+            if city_id.isdigit:
+                #判断输入的是否是数字
+                all_orgs = all_orgs.filter(city_id=int(city_id))
+        org_nums = all_orgs.count()
         try:
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
@@ -24,4 +29,4 @@ class OrgView(View):
         orgs = p.page(page)
         return render(request,'org-list.html',
                       {'all_orgs':orgs,'org_nums':org_nums,'all_citys':all_citys,
-                       'category':category})
+                       'category':category,'city_id':city_id})
