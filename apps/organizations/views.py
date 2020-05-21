@@ -14,7 +14,7 @@ class OrgView(View):
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
             page = 1
-        p = Paginator(all_orgs, per_page=5 ,request=request)
+        p = Paginator(all_orgs, per_page=10 ,request=request)
         #per_page每页显示多少个
         orgs = p.page(page)
         return render(request,'org-list.html',
