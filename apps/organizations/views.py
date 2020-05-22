@@ -18,13 +18,13 @@ class OrgView(View):
         if city_id:
             if city_id.isdigit:
                 #判断输入的是否是数字
-                all_orgs = all_orgs.filter(city_id=int(city_id))
+                all_orgs = all_orgs.filter(city__id=int(city_id))
         org_nums = all_orgs.count()
         try:
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
             page = 1
-        p = Paginator(all_orgs, per_page=10 ,request=request)
+        p = Paginator(all_orgs, per_page=3 ,request=request)
         #per_page每页显示多少个
         orgs = p.page(page)
         return render(request,'org-list.html',
