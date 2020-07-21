@@ -2,6 +2,8 @@ from django.shortcuts import render
 from apps.organizations.models import City,CourseOrg,Teacher
 from django.views.generic.base import View
 from pure_pagination import Paginator,EmptyPage,PageNotAnInteger
+from apps.organizations.forms import AddAskForm
+from 
 # Create your views here.
 class OrgView(View):
     def get(self,request,*args,**kwargs):
@@ -40,3 +42,18 @@ class OrgView(View):
                       {'all_orgs':orgs,'org_nums':org_nums,'all_citys':all_citys,
                        'category':category,'city_id':city_id,'sort':sort,
                        'hot_orgs':hot_orgs})
+class AddAsk(View):
+    '''客户咨询模块'''
+    def post(self,request,*args,**kwargs):
+        userask_form = AddAskForm(request.POST)
+        if userask_form.is_valid():
+            """commit是提交"""
+            userask_form.save(commit=True)
+            return JsonResponse({
+                'status':'success',
+                'msg':'提交成功',
+            })
+        else:
+            return JsonResponse({
+                'status': 'fail',
+                'msg': '提交出错',})
