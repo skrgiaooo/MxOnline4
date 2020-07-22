@@ -31,5 +31,6 @@ urlpatterns = [
     path('orglist/',OrgView.as_view(),name='org-list'),
     path('courselist/',CourseView.as_view(),name='course-list'),
     url(r'^org/',include(('apps.organizations.urls','organizations'),namespace='org')),
-    url(r'^media/(?P<path>.*)$',serve,{'document_root':MEDIA_ROOT})
+    url(r'^media/(?P<path>.*)$',serve,{'document_root':MEDIA_ROOT}),
+    url(r'^course/',include(('apps.courses.urls','courses'),namespace='courses')),
 ]

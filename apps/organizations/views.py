@@ -1,9 +1,9 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from apps.organizations.models import City,CourseOrg,Teacher
 from django.views.generic.base import View
 from pure_pagination import Paginator,EmptyPage,PageNotAnInteger
 from apps.organizations.forms import AddAskForm
-from 
 # Create your views here.
 class OrgView(View):
     def get(self,request,*args,**kwargs):

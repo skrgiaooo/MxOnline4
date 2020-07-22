@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from apps.courses.models import *
+from apps.courses.models import Course
 from django.views.generic.base import View
 from pure_pagination import Paginator,EmptyPage,PageNotAnInteger
 # Create your views here.
 class CourseView(View):
     def get(self,request,*args,**kwargs):
         #课程名称，时常，人数
-        all_courses = Course.objects.all()
+        all_courses = Course.objects.order_by('-click_nums')
         #分页
         try:
             page = request.GET.get('page', 1)
